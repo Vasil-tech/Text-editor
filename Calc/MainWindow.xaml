@@ -1,0 +1,120 @@
+﻿<Window x:Class="Calc.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Calc"
+		mc:Ignorable="d"
+		Title="Калькулятор" Height="475" Width="668" ResizeMode="NoResize"
+		Topmost="False" WindowState="Normal" Icon="./Resources/icon_calc.png">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="menuFile" Header="Файл">
+                <MenuItem x:Name="createNewFile" Header="Создать новый файл" Click="CreateNewFile_Click">
+                    <MenuItem.Icon>
+                        <Image Source="./Resources/openFile.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="openNewFile" Header="Открыть файл" Click="OpenNewFile_Click">
+                    <MenuItem.Icon>
+                        <Image Source="./Resources/openFile.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="saveNewFile" Header="Сохранить файл" Click="SaveNewFile_Click">
+                    <MenuItem.Icon>
+                        <Image Source="./Resources/saveFile.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="exit" Header="Выход" Click="Exit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="./Resources/exit.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="menuEdit" Header="Редактировать">
+                <MenuItem x:Name="selectFont" Header="Шрифт">
+                    <MenuItem x:Name="timesNewRomanFont" Header="Times New Roman" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="TimesNewRomanFont_Click">
+                    </MenuItem>
+                    <MenuItem x:Name="verdanaFont" Header="Verdana" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="VerdanaFont_Click">
+                    </MenuItem>
+                </MenuItem>
+                <Separator/>
+                <MenuItem x:Name="copyText" Header="Копировать"
+						  Command="ApplicationCommands.Copy"
+						  InputGestureText="Ctrl+C">
+                </MenuItem>
+                <MenuItem x:Name="pasteText" Header="Вставить"
+						  Command="ApplicationCommands.Paste"
+						  InputGestureText="Ctrl+V">
+                </MenuItem>
+                <MenuItem x:Name="cutText" Header="Вырезать"
+						  Command="ApplicationCommands.Cut"
+						  InputGestureText="Ctrl+X">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="viewEdit" Header="Вид">
+                <MenuItem x:Name="background" Header="Цвет фона">
+                    <MenuItem x:Name="backgroundRed" Header="Красный" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="BackgroundRed_Click">
+                    </MenuItem>
+                    <MenuItem x:Name="backgroundBlue" Header="Синий" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="BackgroundBlue_Click">
+                    </MenuItem>
+                    <MenuItem x:Name="backgroundWhite" Header="Белый" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="BackgroundWhite_Click">
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="font" Header="Цвет шрифта">
+                    <MenuItem x:Name="fontRed" Header="Красный" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="FontRed_Click">
+                    </MenuItem>
+                    <MenuItem x:Name="fontBlue" Header="Синий" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="FontBlue_Click">
+                    </MenuItem>
+                    <MenuItem x:Name="fontWhite" Header="Белый" IsCheckable="True"
+							  StaysOpenOnClick="True" Click="FontWhite_Click">
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Left" Orientation="Vertical">
+            <ToolBar>
+                <Button x:Name="btnSave" ToolTip="Сохранить файл" Click="SaveNewFile_Click">
+                    <Image Source="./Resources/saveFile.ico" Height="25" Width="25"></Image>
+                </Button>
+                <Button x:Name="btnOpen" ToolTip="Открыть файл" Click="OpenNewFile_Click">
+                    <Image Source="./Resources/openFile.ico" Height="25" Width="25"></Image>
+                </Button>
+                <Button x:Name="btnCut" ToolTip="Вырезать текст" Command="ApplicationCommands.Cut">
+                    <Image Source="./Resources/cut.ico" Height="25" Width="25"></Image>
+                </Button>
+                <Button x:Name="btnPaste" ToolTip="Вставить текст" Command="ApplicationCommands.Paste">
+                    <Image Source="./Resources/paste.ico" Height="25" Width="25"></Image>
+                </Button>
+
+                <Label>Размер шрифта:</Label>
+                <ComboBox x:Name="selectFontSize"
+                          SelectionChanged="SelectFontSize_SelectionChanged">
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem IsSelected="true">14</ComboBoxItem>
+                    <ComboBoxItem>16</ComboBoxItem>
+                    <ComboBoxItem>20</ComboBoxItem>
+                    <ComboBoxItem>24</ComboBoxItem>
+                    <ComboBoxItem>32</ComboBoxItem>
+                    <ComboBoxItem>48</ComboBoxItem>
+                </ComboBox>
+            </ToolBar>
+        </ToolBarTray>
+
+        <ToolBarTray DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <ToolBar>
+                <Label>Поиск:</Label>
+                <TextBox Foreground="white" Width="300" Background="#ccc" Height="20" />
+            </ToolBar>
+        </ToolBarTray>
+        <TextBox x:Name="textBox" Margin="5,5,10,1" FontSize="14" DockPanel.Dock="Top"/>
+    </DockPanel>
+</Window>
