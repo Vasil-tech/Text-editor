@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,19 +48,46 @@ namespace Calc
 
         private void SaveNewFile_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.ShowDialog();
+            saveToFile();
         }
 
         private void OpenNewFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
-            of.ShowDialog();
+            bool? res = of.ShowDialog();
+            if (res != false)
+            {
+                Stream mystream;
+                if ((mystream = of.OpenFile()) != null)
+                {
+                    string file_name = of.FileName;
+                    string file_text = File.ReadAllText(file_name);
+                    textBox.Text = file_text;
+                }
+            }
         }
 
         private void CreateNewFile_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (textBox.Text != "")
+            {
+                saveToFile();
+            }
+            textBox.Text = "";
+        }
+
+        private void saveToFile()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            bool? res = sfd.ShowDialog();
+
+            if (res != false)
+            {
+                using (StreamWriter sw = new StreamWriter(File.Open(sfd.FileName, FileMode.OpenOrCreate)))
+                {
+                    sw.Write(textBox.Text);
+                }
+            }
         }
 
         private void BackgroundRed_Click(object sender, RoutedEventArgs e)
