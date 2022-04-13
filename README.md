@@ -1,2 +1,3 @@
 Text editor
-It is a vpf application consisting of several windows with different functionality.
+
+It is a wpf application consisting of several windows with different functionality.
